@@ -1,0 +1,16 @@
+{
+  "name": "testing-bus-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "gtfs-realtime-bindings": "^1.1.1",
+    "node-fetch": "^3.3.2"
+  },
+  "type": "module"
+}
