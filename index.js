@@ -19,16 +19,28 @@ async function getVehiclePositions() {
     );
 
     // Loop through entities and display vehicle positions
-    feed.entity.forEach((entity) => {
-      if (entity.vehicle && entity.vehicle.position) {
-        console.log(`Vehicle ID: ${entity.vehicle.vehicle?.id || "N/A"}`);
-        console.log(`  Latitude: ${entity.vehicle.position.latitude}`);
-        console.log(`  Longitude: ${entity.vehicle.position.longitude}`);
-        console.log(`  Bearing: ${entity.vehicle.position.bearing || "N/A"}`);
-        console.log(`  Timestamp: ${entity.vehicle.timestamp || "N/A"}`);
-        console.log("---");
-      }
+    // feed.entity.forEach((entity) => {
+    //   if (entity.vehicle && entity.vehicle.position) {
+    //     console.log(`Vehicle ID: ${entity.vehicle.vehicle?.id || "N/A"}`);
+    //     console.log(`  Latitude: ${entity.vehicle.position.latitude}`);
+    //     console.log(`  Longitude: ${entity.vehicle.position.longitude}`);
+    //     console.log(`  Bearing: ${entity.vehicle.position.bearing || "N/A"}`);
+    //     console.log(`  Timestamp: ${entity.vehicle.timestamp || "N/A"}`);
+    //     console.log("---");
+    //   }
+    // });
+    const findBuses = feed.entity.filter((f) => {
+      f.vehicle.routeId == "T2500" || f.vehicle.routeId == "U2500";
     });
+    const cleanedBuses = findBuses.map((c) => {
+      return {
+        id: c.id,
+        busRoute: c.vehicle.routeId,
+        currentPosition: c.position,
+      };
+    });
+
+    console.log(cleanedBuses);
 
     console.log("End process");
   } catch (err) {
